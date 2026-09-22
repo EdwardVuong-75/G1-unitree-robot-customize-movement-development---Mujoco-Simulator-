@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MJHome Robot Console</title>
+<style>
+:root {
+  --bg: #0b0d10;
+  --panel: #151922;
+  --panel2: #10131a;
+  --line: #2a2f3a;
+  --text: #f5f7fb;
+  --muted: #9aa4b2;
+  --blue: #3b82f6;
+  --green: #22c55e;
+  --red: #ef4444;
+  --amber: #f59e0b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, sans-serif;
+}
+header {
+  height: 60px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  background: #080a0e;
+}
+header h1 { margin: 0; font-size: 18px; letter-spacing: .08em; font-weight: 600; }
+header .pill { color: var(--muted); font-size: 13px; border:1px solid var(--line); padding:6px 10px; border-radius:999px; }
+.main {
+  display: grid;
+  grid-template-columns: minmax(520px, 1.05fr) minmax(520px, .95fr);
+  gap: 16px;
+  padding: 16px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+}
+.card h2 { margin: 0 0 12px 0; font-size: 15px; color: #e7ecf3; letter-spacing: .04em; }
+.chat-log {
+  height: 430px;
+  overflow-y: auto;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+}
+.msg {
+  margin: 10px 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  max-width: 86%;
+  line-height: 1.45;
+  font-size: 15px;
+}
+.user { background: #1f2937; margin-left: auto; }
+.bot { background: #0f2544; margin-right: auto; }
+.system { color: var(--muted); font-size: 13px; padding: 6px 0; }
+.row { display: flex; gap: 10px; align-items: center; }
+input, textarea, select {
+  background: #090b10;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+}
+textarea { width: 100%; min-height: 70px; resize: vertical; }
+button {
+  background: #222936;
+  color: var(--text);
+  border: 1px solid #303745;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity .15s, background .15s;
+}
+button:hover { opacity: .85; }
+button.primary { background: var(--blue); border-color: var(--blue); }
+button.green { background: #15803d; border-color: #15803d; }
+button.red { background: #b91c1c; border-color: #b91c1c; }
+button.amber { background: #b45309; border-color: #b45309; }
+button.ghost { background: #111827; }
+button.active { background: #ef4444; border-color: #ef4444; }
+button.selected { background: #e5e7eb; color:#0b0d10; border-color:#e5e7eb; }
+.camera {
+  width: 100%;
+  aspect-ratio: 8/3;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  object-fit: cover;
+}
+.controls { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.grid3 button { min-height: 48px; }
+.empty { visibility:hidden; }
+.small { color: var(--muted); font-size: 13px; }
+.sequence-area {
+  display: grid;
+  grid-template-columns: minmax(520px, 1.15fr) minmax(360px, .85fr);
+  gap: 16px;
+  padding: 0 16px 16px 16px;
+}
+.dropzone {
+  min-height: 300px;
+  border: 1px dashed #3a4352;
+  border-radius: 14px;
+  padding: 12px;
+  background: var(--panel2);
+}
+.seq-item, .tool-item {
+  border: 1px solid var(--line);
+  background: #0d1117;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.seq-item { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: start; }
+.tool-item { cursor: grab; }
+.toolbox { max-height: 380px; overflow-y:auto; }
+.seq-item input { width:100%; margin-top:6px; }
+.log {
+  margin: 0 16px 18px 16px;
+  background: #050607;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+.logbox {
+  height: 230px;
+  overflow-y: auto;
+  color: #cbd5e1;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+@media (max-width: 1100px) {
+  .main, .sequence-area { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>MJHOME ROBOT CONSOLE</h1>
+  <div class="pill" id="top-status">Initializing</div>
+</header>
+
+<section class="main">
+  <div class="card">
+    <h2>LOCAL LLM CONVERSATION</h2>
+    <div class="chat-log" id="chat-log">
+      <div class="system">Ready. Type or press Listen to talk with the local model.</div>
+    </div>
+    <div style="margin-top:12px;">
+      <textarea id="chat-input" placeholder="Ask the robot, e.g. Where are the pods?"></textarea>
+      <div class="row" style="margin-top:10px;">
+        <button class="primary" onclick="sendChat()">Send</button>
+        <button id="listen-btn" class="green" onclick="toggleListen()">Start Listening</button>
+        <button class="ghost" onclick="sayReply()">Say Reply</button>
+        <button class="amber" onclick="executeAction()">Execute Safe Action</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>ROBOT CAMERA</h2>
+      <img class="camera" id="camera" src="/video_feed">
+      <div class="row" style="margin-top:10px; flex-wrap: wrap;">
+        <button id="btn-camera-rgb" onclick="setCamera('rgb')" class="primary selected">RGB</button>
+        <button id="btn-camera-depth" onclick="setCamera('depth')" class="ghost">Depth</button>
+        <button id="btn-vision-off" onclick="setVision('off')" class="ghost selected">Vision Off</button>
+        <button id="btn-vision-face" onclick="setVision('face')" class="ghost">Face</button>
+        <button id="btn-vision-pose" onclick="setVision('pose')" class="ghost">Pose</button>
+        <button id="btn-vision-both" onclick="setVision('both')" class="ghost">Face + Pose</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="card">
+        <h2>WELCOME / GESTURES</h2>
+        <button onclick="sayWelcome('1')" class="ghost" style="width:100%;">Welcome 1 + Shake</button>
+        <button onclick="sayWelcome('2')" class="ghost" style="width:100%;">Welcome 2</button>
+        <button onclick="sayWelcome('3')" class="ghost" style="width:100%;">Welcome 3</button>
+        <button onclick="gesture('shake_hand')" class="ghost" style="width:100%;">Shake Hand</button>
+        <button onclick="gesture('face_wave')" class="ghost" style="width:100%;">Face Wave</button>
+      </div>
+
+      <div class="card">
+        <h2>MOTION CONTROL</h2>
+        <div class="row" style="flex-wrap:wrap;">
+          <button class="green" onclick="motionEnable(true)">Enable</button>
+          <button class="ghost" onclick="motionEnable(false)">Disable</button>
+          <button class="red" onclick="move('stop')">E-STOP</button>
+        </div>
+        <div class="grid3" style="margin-top:10px;">
+          <button onclick="move('turnleft')">↺</button>
+          <button onclick="move('forward')">↑</button>
+          <button onclick="move('turnright')">↻</button>
+          <button onclick="move('left')">←</button>
+          <button class="red" onclick="move('stop')">STOP</button>
+          <button onclick="move('right')">→</button>
+          <button class="empty">.</button>
+          <button onclick="move('back')">↓</button>
+          <button class="empty">.</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sequence-area">
+  <div class="card">
+    <h2>COMMAND SEQUENCE BUILDER</h2>
+    <div class="row" style="margin-bottom:10px; flex-wrap: wrap;">
+      <input id="sequence-name" placeholder="Sequence name" style="width:220px;">
+      <button onclick="saveSequence()">Save</button>
+      <select id="saved-sequences" style="width:220px;"></select>
+      <button onclick="loadSequence()">Load</button>
+      <button onclick="clearSequence()" class="ghost">Clear</button>
+      <button onclick="runSequence()" class="primary">Run Sequence</button>
+    </div>
+    <div class="dropzone" id="sequence" ondragover="event.preventDefault()" ondrop="dropCommand(event)">
+      <div class="small">Drag commands here. You can edit text and wait duration.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>SINGLE COMMANDS</h2>
+    <div class="toolbox" id="toolbox"></div>
+  </div>
+</section>
+
+<section class="log">
+  <div class="row" style="justify-content:space-between;">
+    <h2 style="margin:0; font-size:15px;">STATUS LOG</h2>
+    <button onclick="refresh()">Refresh</button>
+  </div>
+  <div class="logbox" id="log"></div>
+</section>
+
+<script>
+let listening = false;
+let sequence = [];
+
+const tools = [
+  {label:"Forward", type:"move", move:"forward"},
+  {label:"Back", type:"move", move:"back"},
+  {label:"Left", type:"move", move:"left"},
+  {label:"Right", type:"move", move:"right"},
+  {label:"Turn Left", type:"move", move:"turnleft"},
+  {label:"Turn Right", type:"move", move:"turnright"},
+  {label:"Stop", type:"stop"},
+  {label:"Shake Hand", type:"gesture", gesture:"shake_hand"},
+  {label:"Face Wave", type:"gesture", gesture:"face_wave"},
+  {label:"Enable Motion", type:"enable_motion"},
+  {label:"Disable Motion", type:"disable_motion"},
+  {label:"Wait", type:"wait", seconds:1.0},
+  {label:"Say Custom Text", type:"say_text", text:"Please follow me."},
+  {label:"Welcome 1", type:"say_welcome", choice:"1"},
+  {label:"Welcome 2", type:"say_welcome", choice:"2"},
+  {label:"Welcome 3", type:"say_welcome", choice:"3"},
+];
+
+function addMsg(role, text) {
+  const log = document.getElementById('chat-log');
+  const div = document.createElement('div');
+  div.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+  div.innerText = text;
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+
+function showResult(data) {
+  if (data.result) {
+    const r = data.result;
+    if (r.reply) addMsg('bot', r.reply);
+  }
+  if (data.message) document.getElementById('top-status').innerText = data.message;
+  if (data.ok === false) alert(data.message || 'Error');
+  refresh();
+}
+
+async function post(url, body={}) {
+  const res = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+  const data = await res.json();
+  showResult(data);
+  return data;
+}
+
+async function sendChat() {
+  const text = document.getElementById('chat-input').value.trim();
+  if (!text) return;
+  addMsg('user', text);
+  document.getElementById('chat-input').value = '';
+  await post('/api/chat_text', {text});
+}
+
+async function toggleListen() {
+  const data = await post('/api/listen_toggle', {});
+  listening = !!data.listening;
+  const btn = document.getElementById('listen-btn');
+  btn.innerText = listening ? 'Stop Listening' : 'Start Listening';
+  btn.className = listening ? 'active' : 'green';
+}
+
+async function sayReply(){ await post('/api/say_reply', {}); }
+async function executeAction(){ await post('/api/execute_action', {}); }
+async function sayWelcome(c){ await post('/api/say_welcome/' + c, {}); }
+async function gesture(g){ await post('/api/gesture/' + g, {}); }
+async function motionEnable(v){ await post('/api/motion_enable', {enabled:v}); }
+async function move(c){ await post('/api/move/' + c, {}); }
+
+function setSelected(prefix, activeName, names) {
+  names.forEach(name => {
+    const el = document.getElementById(prefix + name);
+    if (!el) return;
+    if (name === activeName) el.classList.add('selected');
+    else el.classList.remove('selected');
+  });
+}
+
+async function setCamera(mode) {
+  await post('/api/set_camera', {mode});
+  setSelected('btn-camera-', mode, ['rgb', 'depth']);
+  document.getElementById('camera').src = '/video_feed?t=' + Date.now();
+}
+
+async function setVision(mode) {
+  await post('/api/set_vision', {mode});
+  setSelected('btn-vision-', mode, ['off', 'face', 'pose', 'both']);
+}
+
+function renderTools() {
+  const box = document.getElementById('toolbox');
+  box.innerHTML = '';
+  tools.forEach((t, idx) => {
+    const div = document.createElement('div');
+    div.className = 'tool-item';
+    div.draggable = true;
+    div.ondragstart = e => e.dataTransfer.setData('text/plain', String(idx));
+    div.innerHTML = `<b>${t.label}</b><div class="small">${t.type}</div>`;
+    div.onclick = () => addCommand(JSON.parse(JSON.stringify(t)));
+    box.appendChild(div);
+  });
+}
+
+function dropCommand(ev) {
+  ev.preventDefault();
+  const idx = parseInt(ev.dataTransfer.getData('text/plain'));
+  if (!isNaN(idx)) addCommand(JSON.parse(JSON.stringify(tools[idx])));
+}
+
+function addCommand(cmd) {
+  sequence.push(cmd);
+  renderSequence();
+}
+
+function renderSequence() {
+  const zone = document.getElementById('sequence');
+  zone.innerHTML = '';
+  if (sequence.length === 0) {
+    zone.innerHTML = '<div class="small">Drag commands here. You can edit text and wait duration.</div>';
+    return;
+  }
+  sequence.forEach((cmd, i) => {
+    const item = document.createElement('div');
+    item.className = 'seq-item';
+    let body = `<div><b>${i+1}. ${cmd.type}</b>`;
+    if (cmd.type === 'say_text') {
+      body += `<input value="${cmd.text || ''}" onchange="sequence[${i}].text=this.value">`;
+    } else if (cmd.type === 'wait') {
+      body += `<input type="number" step="0.1" value="${cmd.seconds || 1}" onchange="sequence[${i}].seconds=parseFloat(this.value)">`;
+    } else if (cmd.type === 'move') {
+      body += `<div class="small">${cmd.move}</div>`;
+    } else if (cmd.type === 'say_welcome') {
+      body += `<div class="small">Welcome ${cmd.choice}</div>`;
+    } else if (cmd.type === 'gesture') {
+      body += `<div class="small">${cmd.gesture}</div>`;
+    }
+    body += `</div>`;
+    body += `<div>
+      <button onclick="upCmd(${i})">↑</button>
+      <button onclick="downCmd(${i})">↓</button>
+      <button class="red" onclick="removeCmd(${i})">×</button>
+    </div>`;
+    item.innerHTML = body;
+    zone.appendChild(item);
+  });
+}
+
+function upCmd(i){ if(i>0){ [sequence[i-1], sequence[i]]=[sequence[i], sequence[i-1]]; renderSequence(); } }
+function downCmd(i){ if(i<sequence.length-1){ [sequence[i+1], sequence[i]]=[sequence[i], sequence[i+1]]; renderSequence(); } }
+function removeCmd(i){ sequence.splice(i,1); renderSequence(); }
+function clearSequence(){ sequence=[]; renderSequence(); }
+
+function saveSequence() {
+  const name = document.getElementById('sequence-name').value.trim();
+  if (!name) return alert('Please enter a sequence name.');
+  localStorage.setItem('seq_' + name, JSON.stringify(sequence));
+  refreshSavedSequences();
+}
+
+function refreshSavedSequences() {
+  const sel = document.getElementById('saved-sequences');
+  sel.innerHTML = '';
+  Object.keys(localStorage).filter(k=>k.startsWith('seq_')).forEach(k => {
+    const opt = document.createElement('option');
+    opt.value = k;
+    opt.innerText = k.replace('seq_','');
+    sel.appendChild(opt);
+  });
+}
+
+function loadSequence() {
+  const key = document.getElementById('saved-sequences').value;
+  if (!key) return;
+  sequence = JSON.parse(localStorage.getItem(key) || '[]');
+  document.getElementById('sequence-name').value = key.replace('seq_','');
+  renderSequence();
+}
+
+async function runSequence() {
+  await post('/api/run_sequence', {commands: sequence});
+}
+
+async function refresh() {
+  const status = await fetch('/api/status').then(r=>r.json());
+  document.getElementById('top-status').innerText = status.message.split('\\n')[0] || 'OK';
+  const log = await fetch('/api/log').then(r=>r.json());
+  document.getElementById('log').innerText = log.log.join('\\n');
+  const box = document.getElementById('log');
+  box.scrollTop = box.scrollHeight;
+  const last = await fetch('/api/last_result').then(r=>r.json());
+  if (last.stt && last.stt !== window._lastStt) {
+    window._lastStt = last.stt;
+    addMsg('user', last.stt);
+  }
+}
+
+renderTools();
+renderSequence();
+refreshSavedSequences();
+setInterval(refresh, 2000);
+refresh();
+</script>
+</body>
+</html>

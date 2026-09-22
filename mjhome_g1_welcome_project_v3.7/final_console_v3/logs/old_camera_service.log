@@ -1,0 +1,51 @@
+[11:12:07] MJHome G1 Welcome Project starting...
+[11:12:07] BASE_DIR=/home/unitree/mjhome_g1_welcome_project
+[11:12:07] PORT=5010
+[11:12:07] HAS_REALSENSE=True
+[11:12:07] G1_WALK_CLI=/home/unitree/unitree_sdk2_python/g1_walk_cli.py
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5010
+ * Running on http://192.168.123.164:5010
+Press CTRL+C to quit
+127.0.0.1 - - [09/Jul/2026 11:12:07] "GET /api/status HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:12:07] "POST /api/set_camera HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:12:13] "GET /api/status HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:12:13] "POST /api/set_camera HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:12:19] "GET /video_feed HTTP/1.1" 200 -
+[11:15:19] MJHome G1 Welcome Project starting...
+[11:15:19] BASE_DIR=/home/unitree/mjhome_g1_welcome_project
+[11:15:19] PORT=5010
+[11:15:19] HAS_REALSENSE=True
+[11:15:19] G1_WALK_CLI=/home/unitree/unitree_sdk2_python/g1_walk_cli.py
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5010
+ * Running on http://192.168.123.164:5010
+Press CTRL+C to quit
+127.0.0.1 - - [09/Jul/2026 11:15:19] "GET /api/status HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:15:19] "POST /api/set_camera HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:15:22] "GET /api/status HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:15:22] "POST /api/set_camera HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:15:23] "GET /video_feed HTTP/1.1" 200 -
+[11:26:34] MJHome G1 Welcome Project starting...
+[11:26:34] BASE_DIR=/home/unitree/mjhome_g1_welcome_project
+[11:26:34] PORT=5010
+[11:26:34] HAS_REALSENSE=True
+[11:26:34] G1_WALK_CLI=/home/unitree/unitree_sdk2_python/g1_walk_cli.py
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5010
+ * Running on http://192.168.123.164:5010
+Press CTRL+C to quit
+127.0.0.1 - - [09/Jul/2026 11:26:34] "GET /api/status HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:26:34] "POST /api/set_camera HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:27:45] "GET /api/status HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:27:45] "POST /api/set_camera HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 11:27:46] "GET /video_feed HTTP/1.1" 200 -

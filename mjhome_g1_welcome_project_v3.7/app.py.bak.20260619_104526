@@ -1,0 +1,431 @@
+import os
+import subprocess
+import threading
+import time
+from datetime import datetime
+from pathlib import Path
+
+import cv2
+import numpy as np
+from flask import Flask, Response, jsonify, render_template, request
+
+try:
+    import pyrealsense2 as rs
+    HAS_REALSENSE = True
+except Exception:
+    rs = None
+    HAS_REALSENSE = False
+
+BASE_DIR = Path(__file__).resolve().parent
+AUDIO_DIR = BASE_DIR / "audio"
+
+NETWORK_INTERFACE = os.environ.get("NETWORK_INTERFACE", "eth0")
+PORT = int(os.environ.get("PORT", "5010"))
+DEFAULT_CAMERA_ID = int(os.environ.get("DEFAULT_CAMERA_ID", "3"))
+AUDIO_DEVICE = os.environ.get("AUDIO_DEVICE", "")
+
+# 不复制、不修改旧项目；只调用旧项目里已经验证过的底层脚本
+G1_WALK_CLI = Path(os.environ.get("G1_WALK_CLI", "/home/unitree/unitree_sdk2_python/g1_walk_cli.py"))
+MJHOME_SAY_SCRIPT = Path(os.environ.get("MJHOME_SAY_SCRIPT", "/home/unitree/unitree_sdk2_python/mjhome_say.py"))
+
+app = Flask(__name__)
+
+log_lines = []
+MAX_LOG_LINES = 500
+motion_enabled = False
+
+camera_lock = threading.Lock()
+camera_mode = "v4l2"
+camera_id = DEFAULT_CAMERA_ID
+
+PHRASES = {
+    "1": "Welcome to MJ Home, your cozy and future-ready space.",
+    "2": "We are MJ Home, building a sustainable, long-term future for everyone.",
+    "3": "MJ Home is proud to serve our community and help transform New Zealand.",
+}
+
+
+def add_log(message: str):
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    line = f"[{timestamp}] {message}"
+    print(line)
+    log_lines.append(line)
+    if len(log_lines) > MAX_LOG_LINES:
+        del log_lines[: len(log_lines) - MAX_LOG_LINES]
+
+
+def run_command_async(cmd, label="command", timeout=120):
+    def worker():
+        add_log(f"START {label}: {' '.join(str(x) for x in cmd)}")
+        try:
+            result = subprocess.run(
+                [str(x) for x in cmd],
+                cwd=str(BASE_DIR),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                timeout=timeout,
+            )
+            output = result.stdout.strip()
+            if output:
+                for line in output.splitlines()[-80:]:
+                    add_log(f"{label}: {line}")
+            add_log(f"END {label}, return code={result.returncode}")
+        except subprocess.TimeoutExpired:
+            add_log(f"TIMEOUT {label}")
+        except Exception as e:
+            add_log(f"ERROR {label}: {e}")
+
+    threading.Thread(target=worker, daemon=True).start()
+
+
+def encode_jpg(frame):
+    ok, jpg = cv2.imencode(".jpg", frame, [int(cv2.IMWRITE_JPEG_QUALITY), 80])
+    if not ok:
+        return None
+    return jpg.tobytes()
+
+
+def blank_frame(text, width=960, height=540):
+    img = np.zeros((height, width, 3), dtype=np.uint8)
+    cv2.putText(
+        img,
+        text[:90],
+        (35, height // 2),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.8,
+        (255, 255, 255),
+        2,
+    )
+    return img
+
+
+def normalize_frame(frame):
+    if frame is None:
+        return blank_frame("Empty frame")
+
+    if frame.dtype == np.uint16:
+        frame = cv2.convertScaleAbs(frame, alpha=0.03)
+        frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
+
+    if len(frame.shape) == 2:
+        frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+
+    return cv2.resize(frame, (960, 540))
+
+
+def draw_zones(frame, label):
+    h, w = frame.shape[:2]
+    x1 = w // 3
+    x2 = 2 * w // 3
+
+    cv2.line(frame, (x1, 0), (x1, h), (255, 255, 255), 2)
+    cv2.line(frame, (x2, 0), (x2, h), (255, 255, 255), 2)
+
+    cv2.putText(frame, "LEFT", (20, 42), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2)
+    cv2.putText(frame, "CENTER", (x1 + 20, 42), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2)
+    cv2.putText(frame, "RIGHT", (x2 + 20, 42), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2)
+
+    cv2.putText(
+        frame,
+        f"{label} | {datetime.now().strftime('%H:%M:%S')}",
+        (20, h - 24),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.75,
+        (255, 255, 255),
+        2,
+    )
+    return frame
+
+
+def generate_v4l2_frames():
+    last_id = None
+    cap = None
+
+    while True:
+        with camera_lock:
+            current_id = camera_id
+
+        if cap is None or current_id != last_id:
+            if cap is not None:
+                cap.release()
+
+            add_log(f"Opening V4L2 camera /dev/video{current_id}")
+            cap = cv2.VideoCapture(current_id, cv2.CAP_V4L2)
+            cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+            cap.set(cv2.CAP_PROP_FPS, 15)
+            last_id = current_id
+            time.sleep(0.4)
+
+        ok, frame = cap.read()
+
+        if not ok or frame is None:
+            frame = blank_frame(f"/dev/video{current_id} not available")
+            time.sleep(0.2)
+        else:
+            frame = normalize_frame(frame)
+            frame = draw_zones(frame, f"V4L2 /dev/video{current_id}")
+
+        jpg = encode_jpg(frame)
+        if jpg:
+            yield b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + jpg + b"\r\n"
+
+        time.sleep(0.05)
+
+
+def generate_realsense_frames(mode="combined"):
+    if not HAS_REALSENSE:
+        frame = blank_frame("pyrealsense2 is not installed. Use /dev/video mode.")
+        jpg = encode_jpg(frame)
+        while True:
+            yield b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + jpg + b"\r\n"
+            time.sleep(0.3)
+
+    pipeline = rs.pipeline()
+    config = rs.config()
+
+    try:
+        add_log(f"Starting RealSense stream: {mode}")
+        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+        config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+
+        pipeline.start(config)
+        align = rs.align(rs.stream.color)
+
+        while True:
+            frames = pipeline.wait_for_frames(timeout_ms=5000)
+            frames = align.process(frames)
+
+            color_frame = frames.get_color_frame()
+            depth_frame = frames.get_depth_frame()
+
+            if not color_frame or not depth_frame:
+                frame = blank_frame("No RealSense RGB/depth frame")
+            else:
+                color = np.asanyarray(color_frame.get_data())
+                depth = np.asanyarray(depth_frame.get_data())
+
+                depth_color = cv2.applyColorMap(
+                    cv2.convertScaleAbs(depth, alpha=0.03),
+                    cv2.COLORMAP_JET,
+                )
+
+                color = cv2.resize(color, (960, 540))
+                depth_color = cv2.resize(depth_color, (960, 540))
+
+                color = draw_zones(color, "RealSense RGB")
+                depth_color = draw_zones(depth_color, "RealSense Depth")
+
+                if mode == "rgb":
+                    frame = color
+                elif mode == "depth":
+                    frame = depth_color
+                else:
+                    frame = np.hstack((color, depth_color))
+
+            jpg = encode_jpg(frame)
+            if jpg:
+                yield b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + jpg + b"\r\n"
+
+            time.sleep(0.04)
+
+    except Exception as e:
+        add_log(f"RealSense error: {e}")
+        frame = blank_frame("RealSense error: " + str(e))
+        jpg = encode_jpg(frame)
+        while True:
+            yield b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + jpg + b"\r\n"
+            time.sleep(0.3)
+
+    finally:
+        try:
+            pipeline.stop()
+        except Exception:
+            pass
+
+
+def audio_path(choice: str):
+    candidates = [
+        AUDIO_DIR / f"phrase{choice}.wav",
+        AUDIO_DIR / f"mjhome_phrase{choice}.wav",
+        BASE_DIR / f"phrase{choice}.wav",
+    ]
+    for p in candidates:
+        if p.exists():
+            return p
+    return None
+
+
+def say_phrase(choice: str):
+    if choice not in {"1", "2", "3", "random"}:
+        return False, f"Unknown voice choice: {choice}"
+
+    if choice == "random":
+        if MJHOME_SAY_SCRIPT.exists():
+            run_command_async(
+                ["python3", MJHOME_SAY_SCRIPT, NETWORK_INTERFACE, "random"],
+                label="say_random",
+                timeout=120,
+            )
+            return True, "Random greeting started via mjhome_say.py."
+        choice = "1"
+
+    wav = audio_path(choice)
+    if wav is not None:
+        cmd = ["aplay"]
+        if AUDIO_DEVICE:
+            cmd += ["-D", AUDIO_DEVICE]
+        cmd.append(str(wav))
+        run_command_async(cmd, label=f"say_phrase_{choice}", timeout=60)
+        return True, f"Playing phrase {choice}: {PHRASES[choice]}"
+
+    if MJHOME_SAY_SCRIPT.exists():
+        run_command_async(
+            ["python3", MJHOME_SAY_SCRIPT, NETWORK_INTERFACE, choice],
+            label=f"say_fallback_{choice}",
+            timeout=120,
+        )
+        return True, f"Local WAV missing, using mjhome_say.py for phrase {choice}."
+
+    return False, f"Missing audio/phrase{choice}.wav and mjhome_say.py not found."
+
+
+def move_robot_command(cmd: str):
+    global motion_enabled
+
+    allowed = {"stop", "forward", "back", "left", "right", "turnleft", "turnright"}
+    if cmd not in allowed:
+        return False, f"Unknown movement command: {cmd}"
+
+    if cmd != "stop" and not motion_enabled:
+        return False, "Motion is disabled. Click Enable Motion first."
+
+    if not G1_WALK_CLI.exists():
+        return False, f"g1_walk_cli.py not found at {G1_WALK_CLI}"
+
+    run_command_async(
+        ["python3", G1_WALK_CLI, NETWORK_INTERFACE, cmd],
+        label=f"move_{cmd}",
+        timeout=120,
+    )
+    return True, f"Movement command sent: {cmd}"
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/video_feed")
+def video_feed():
+    with camera_lock:
+        mode = camera_mode
+
+    if mode == "rs_combined":
+        return Response(generate_realsense_frames("combined"), mimetype="multipart/x-mixed-replace; boundary=frame")
+    if mode == "rs_rgb":
+        return Response(generate_realsense_frames("rgb"), mimetype="multipart/x-mixed-replace; boundary=frame")
+    if mode == "rs_depth":
+        return Response(generate_realsense_frames("depth"), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+    return Response(generate_v4l2_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+
+@app.route("/api/set_camera", methods=["POST"])
+def set_camera():
+    global camera_mode, camera_id
+
+    data = request.get_json(silent=True) or {}
+    mode = data.get("mode", "v4l2")
+
+    with camera_lock:
+        if mode == "v4l2":
+            try:
+                camera_id = int(data.get("camera_id", DEFAULT_CAMERA_ID))
+            except Exception:
+                return jsonify({"ok": False, "message": f"Invalid camera id: {data.get('camera_id')}"})
+            camera_mode = "v4l2"
+            add_log(f"Camera switched to /dev/video{camera_id}")
+            return jsonify({"ok": True, "message": f"Camera switched to /dev/video{camera_id}"})
+
+        if mode in {"rs_combined", "rs_rgb", "rs_depth"}:
+            camera_mode = mode
+            add_log(f"Camera switched to {mode}")
+            if not HAS_REALSENSE:
+                return jsonify({"ok": True, "message": f"{mode} selected, but pyrealsense2 is not installed."})
+            return jsonify({"ok": True, "message": f"Camera switched to {mode}"})
+
+    return jsonify({"ok": False, "message": f"Unknown camera mode: {mode}"})
+
+
+@app.route("/api/say/<choice>", methods=["POST"])
+def api_say(choice):
+    ok, message = say_phrase(choice)
+    return jsonify({"ok": ok, "message": message})
+
+
+@app.route("/api/motion_enable", methods=["POST"])
+def api_motion_enable():
+    global motion_enabled
+
+    data = request.get_json(silent=True) or {}
+    motion_enabled = bool(data.get("enabled", True))
+    add_log(f"Motion enabled: {motion_enabled}")
+    return jsonify({"ok": True, "message": f"Motion enabled: {motion_enabled}"})
+
+
+@app.route("/api/move/<cmd>", methods=["POST"])
+def api_move(cmd):
+    ok, message = move_robot_command(cmd)
+    return jsonify({"ok": ok, "message": message})
+
+
+@app.route("/api/demo/<zone>", methods=["POST"])
+def api_demo(zone):
+    if zone == "center":
+        ok, message = say_phrase("1")
+        return jsonify({"ok": ok, "message": "Center Welcome: " + message})
+
+    if zone == "right":
+        ok1, msg1 = say_phrase("2")
+        time.sleep(0.35)
+        ok2, msg2 = move_robot_command("right")
+        return jsonify({"ok": ok1 and ok2, "message": f"Right Welcome: {msg1}; {msg2}"})
+
+    if zone == "left":
+        ok1, msg1 = say_phrase("3")
+        time.sleep(0.35)
+        ok2, msg2 = move_robot_command("left")
+        return jsonify({"ok": ok1 and ok2, "message": f"Left Welcome: {msg1}; {msg2}"})
+
+    return jsonify({"ok": False, "message": f"Unknown demo zone: {zone}"})
+
+
+@app.route("/api/status", methods=["GET"])
+def api_status():
+    with camera_lock:
+        cam = f"{camera_mode}, /dev/video{camera_id}"
+    msg = (
+        f"Camera: {cam}\n"
+        f"pyrealsense2: {HAS_REALSENSE}\n"
+        f"Motion enabled: {motion_enabled}\n"
+        f"Network interface: {NETWORK_INTERFACE}\n"
+        f"G1 walk script: {G1_WALK_CLI}\n"
+        f"Audio device: {AUDIO_DEVICE or 'default'}"
+    )
+    return jsonify({"ok": True, "message": msg})
+
+
+@app.route("/api/log", methods=["GET"])
+def api_log():
+    return jsonify({"ok": True, "log": log_lines})
+
+
+if __name__ == "__main__":
+    add_log("MJHome G1 Welcome Project starting...")
+    add_log(f"BASE_DIR={BASE_DIR}")
+    add_log(f"PORT={PORT}")
+    add_log(f"HAS_REALSENSE={HAS_REALSENSE}")
+    add_log(f"G1_WALK_CLI={G1_WALK_CLI}")
+    app.run(host="0.0.0.0", port=PORT, debug=False, threaded=True)
