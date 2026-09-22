@@ -1,0 +1,88 @@
+<mujoco model="g1_upper_body_puppet">
+  <compiler angle="radian" autolimits="true" inertiafromgeom="true"/>
+  <option timestep="0.02" gravity="0 0 0" iterations="20"/>
+  <visual>
+    <headlight ambient="0.4 0.4 0.4" diffuse="0.6 0.6 0.6"/>
+  </visual>
+  <default>
+    <joint limited="true" damping="8" armature="0.01"/>
+    <geom contype="0" conaffinity="0" rgba="0.7 0.75 0.8 1" density="800"/>
+  </default>
+  <!-- q=0 matches Unitree G1 rest: arms hanging down (-Z), not T-pose. -->
+  <worldbody>
+    <light pos="0 0 2" dir="0 0 -1"/>
+    <geom name="floor" type="plane" size="1 1 0.1" rgba="0.2 0.2 0.22 1" pos="0 0 0"/>
+    <body name="pelvis" pos="0 0 0.85">
+      <geom type="capsule" fromto="0 0 -0.08 0 0 0.10" size="0.09"/>
+      <body name="waist_yaw_link">
+        <joint name="waist_yaw_joint" type="hinge" axis="0 0 1" range="-1.2 1.2"/>
+        <geom type="capsule" fromto="0 0 0 0 0 0.16" size="0.08"/>
+        <body name="torso" pos="0 0 0.16">
+          <geom type="capsule" fromto="0 0 0 0 0 0.22" size="0.10"/>
+          <!-- left arm: +Y, hangs down at q=0 -->
+          <body name="left_shoulder_pitch_link" pos="0 0.14 0.18">
+            <joint name="left_shoulder_pitch_joint" type="hinge" axis="0 1 0" range="-3.0 2.6"/>
+            <geom type="sphere" size="0.04"/>
+            <body name="left_shoulder_roll_link">
+              <joint name="left_shoulder_roll_joint" type="hinge" axis="1 0 0" range="-0.3 2.3"/>
+              <geom type="sphere" size="0.018"/>
+              <body name="left_shoulder_yaw_link">
+                <joint name="left_shoulder_yaw_joint" type="hinge" axis="0 0 1" range="-2.6 2.6"/>
+                <geom type="sphere" size="0.016"/>
+                <geom type="capsule" fromto="0 0 0 0 0 -0.18" size="0.035"/>
+                <body name="left_elbow_link" pos="0 0 -0.18">
+                  <joint name="left_elbow_joint" type="hinge" axis="0 1 0" range="-1.05 2.1"/>
+                  <geom type="sphere" size="0.022"/>
+                  <geom type="capsule" fromto="0 0 0 0 0 -0.15" size="0.028"/>
+                  <body name="left_wrist_roll_link" pos="0 0 -0.15">
+                    <joint name="left_wrist_roll_joint" type="hinge" axis="0 0 1" range="-1.97 1.97"/>
+                    <geom type="sphere" size="0.014"/>
+                    <body name="left_wrist_pitch_link">
+                      <joint name="left_wrist_pitch_joint" type="hinge" axis="0 1 0" range="-1.61 1.61"/>
+                      <geom type="sphere" size="0.012"/>
+                      <body name="left_wrist_yaw_link">
+                        <joint name="left_wrist_yaw_joint" type="hinge" axis="1 0 0" range="-1.61 1.61"/>
+                        <geom type="capsule" fromto="0 0 0 0 0 -0.08" size="0.020" rgba="0.9 0.5 0.3 1"/>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+          <!-- right arm: -Y, hangs down at q=0 -->
+          <body name="right_shoulder_pitch_link" pos="0 -0.14 0.18">
+            <joint name="right_shoulder_pitch_joint" type="hinge" axis="0 1 0" range="-3.0 2.6"/>
+            <geom type="sphere" size="0.04"/>
+            <body name="right_shoulder_roll_link">
+              <joint name="right_shoulder_roll_joint" type="hinge" axis="1 0 0" range="-2.3 0.3"/>
+              <geom type="sphere" size="0.018"/>
+              <body name="right_shoulder_yaw_link">
+                <joint name="right_shoulder_yaw_joint" type="hinge" axis="0 0 1" range="-2.6 2.6"/>
+                <geom type="sphere" size="0.016"/>
+                <geom type="capsule" fromto="0 0 0 0 0 -0.18" size="0.035"/>
+                <body name="right_elbow_link" pos="0 0 -0.18">
+                  <joint name="right_elbow_joint" type="hinge" axis="0 1 0" range="-1.05 2.1"/>
+                  <geom type="sphere" size="0.022"/>
+                  <geom type="capsule" fromto="0 0 0 0 0 -0.15" size="0.028"/>
+                  <body name="right_wrist_roll_link" pos="0 0 -0.15">
+                    <joint name="right_wrist_roll_joint" type="hinge" axis="0 0 1" range="-1.97 1.97"/>
+                    <geom type="sphere" size="0.014"/>
+                    <body name="right_wrist_pitch_link">
+                      <joint name="right_wrist_pitch_joint" type="hinge" axis="0 1 0" range="-1.61 1.61"/>
+                      <geom type="sphere" size="0.012"/>
+                      <body name="right_wrist_yaw_link">
+                        <joint name="right_wrist_yaw_joint" type="hinge" axis="1 0 0" range="-1.61 1.61"/>
+                        <geom type="capsule" fromto="0 0 0 0 0 -0.08" size="0.020" rgba="0.3 0.6 0.9 1"/>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>

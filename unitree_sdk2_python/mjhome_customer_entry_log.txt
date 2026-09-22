@@ -1,0 +1,439 @@
+[2026-06-04 07:26:34] [MJHome] NetworkInterface: eth0
+[2026-06-04 07:26:34] [MJHome] Camera ID: 3
+[2026-06-04 07:26:34] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 07:26:36] [MJHome] Customer entry detection started.
+[2026-06-04 07:26:36] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 07:26:36] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 07:26:36] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 07:26:51] [MJHome] Customer entry detected. motion_area=25210.5
+[2026-06-04 07:26:51] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_072651.jpg
+[2026-06-04 07:26:51] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 07:26:52] [Action] face wave
+[2026-06-04 07:26:59] [Action] release arm
+[2026-06-04 07:26:59] [Audio] Done.
+[2026-06-04 07:26:59] [MJHome] Greeting finished.
+[2026-06-04 07:27:24] [MJHome] Customer entry detected. motion_area=55933.5
+[2026-06-04 07:27:24] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_072724.jpg
+[2026-06-04 07:27:24] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 07:27:24] [Action] face wave
+[2026-06-04 07:27:31] [Action] release arm
+[2026-06-04 07:27:32] [Audio] Done.
+[2026-06-04 07:27:32] [MJHome] Greeting finished.
+[2026-06-04 07:27:38] [MJHome] Stopped by user.
+[2026-06-04 07:27:38] [MJHome] Camera released.
+[2026-06-04 07:36:06] [MJHome] NetworkInterface: eth0
+[2026-06-04 07:36:06] [MJHome] Camera ID: 3
+[2026-06-04 07:36:06] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 07:36:08] [MJHome] Customer entry detection started.
+[2026-06-04 07:36:08] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 07:36:08] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 07:36:08] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 07:36:13] [MJHome] Customer entry detected. motion_area=12061.0
+[2026-06-04 07:36:13] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_073613.jpg
+[2026-06-04 07:36:13] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 07:36:14] [Action] face wave
+[2026-06-04 07:36:21] [Action] release arm
+[2026-06-04 07:36:21] [Audio] Done.
+[2026-06-04 07:36:21] [MJHome] Greeting finished.
+[2026-06-04 07:36:44] [MJHome] Stopped by user.
+[2026-06-04 07:36:44] [MJHome] Camera released.
+[2026-06-04 07:37:18] [MJHome] NetworkInterface: eth0
+[2026-06-04 07:37:18] [MJHome] Camera ID: 3
+[2026-06-04 07:37:18] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 07:37:19] [MJHome] Customer entry detection started.
+[2026-06-04 07:37:19] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 07:37:19] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 07:37:19] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 07:37:22] [MJHome] Customer entry detected. motion_area=43925.5
+[2026-06-04 07:37:22] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_073722.jpg
+[2026-06-04 07:37:22] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 07:37:22] [Action] face wave
+[2026-06-04 07:37:29] [Action] release arm
+[2026-06-04 07:37:30] [Audio] Done.
+[2026-06-04 07:37:30] [MJHome] Greeting finished.
+[2026-06-04 07:37:35] [MJHome] Stopped by user.
+[2026-06-04 07:37:35] [MJHome] Camera released.
+[2026-06-04 07:43:19] [MJHome] NetworkInterface: eth0
+[2026-06-04 07:43:19] [MJHome] Camera ID: 3
+[2026-06-04 07:43:19] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 07:43:20] [MJHome] Customer entry detection started.
+[2026-06-04 07:43:20] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 07:43:20] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 07:43:20] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 07:43:23] [MJHome] Customer entry detected. motion_area=20707.0
+[2026-06-04 07:43:23] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_074323.jpg
+[2026-06-04 07:43:23] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 07:43:24] [Action] face wave
+[2026-06-04 07:43:30] [MJHome] Stopped by user.
+[2026-06-04 07:43:30] [MJHome] Camera released.
+[2026-06-04 09:17:03] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:17:03] [MJHome] Camera ID: 3
+[2026-06-04 09:17:03] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:17:04] [MJHome] Customer entry detection started.
+[2026-06-04 09:17:04] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:17:04] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:17:04] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:17:07] [MJHome] Customer entry detected. motion_area=4922.5
+[2026-06-04 09:17:07] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_091707.jpg
+[2026-06-04 09:17:07] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:17:08] [Action] face wave
+[2026-06-04 09:17:15] [Action] release arm
+[2026-06-04 09:17:15] [Audio] Done.
+[2026-06-04 09:17:15] [MJHome] Greeting finished.
+[2026-06-04 09:17:50] [MJHome] Customer entry detected. motion_area=5023.5
+[2026-06-04 09:17:50] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_091750.jpg
+[2026-06-04 09:17:50] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:17:51] [Action] face wave
+[2026-06-04 09:17:58] [Action] release arm
+[2026-06-04 09:17:58] [Audio] Done.
+[2026-06-04 09:17:58] [MJHome] Greeting finished.
+[2026-06-04 09:18:11] [MJHome] Stopped by user.
+[2026-06-04 09:18:11] [MJHome] Camera released.
+[2026-06-04 09:18:30] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:18:30] [MJHome] Camera ID: 3
+[2026-06-04 09:18:30] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:18:31] [MJHome] Customer entry detection started.
+[2026-06-04 09:18:31] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:18:31] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:18:31] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:18:34] [MJHome] Customer entry detected. motion_area=14704.0
+[2026-06-04 09:18:34] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_091834.jpg
+[2026-06-04 09:18:34] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:18:34] [Action] face wave
+[2026-06-04 09:18:41] [Action] release arm
+[2026-06-04 09:18:41] [Audio] Done.
+[2026-06-04 09:18:41] [MJHome] Greeting finished.
+[2026-06-04 09:19:06] [MJHome] Customer entry detected. motion_area=5697.0
+[2026-06-04 09:19:06] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_091906.jpg
+[2026-06-04 09:19:06] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:19:07] [Action] face wave
+[2026-06-04 09:19:14] [Action] release arm
+[2026-06-04 09:19:14] [Audio] Done.
+[2026-06-04 09:19:14] [MJHome] Greeting finished.
+[2026-06-04 09:19:43] [MJHome] Customer entry detected. motion_area=12405.0
+[2026-06-04 09:19:43] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_091943.jpg
+[2026-06-04 09:19:43] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:19:44] [Action] face wave
+[2026-06-04 09:19:51] [Action] release arm
+[2026-06-04 09:19:51] [Audio] Done.
+[2026-06-04 09:19:51] [MJHome] Greeting finished.
+[2026-06-04 09:19:53] [MJHome] Stopped by user.
+[2026-06-04 09:19:53] [MJHome] Camera released.
+[2026-06-04 09:20:18] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:20:18] [MJHome] Camera ID: 3
+[2026-06-04 09:20:18] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:20:20] [MJHome] Customer entry detection started.
+[2026-06-04 09:20:20] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:20:20] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:20:20] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:20:25] [MJHome] Customer entry detected. motion_area=8744.5
+[2026-06-04 09:20:25] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_092025.jpg
+[2026-06-04 09:20:25] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:20:26] [Action] face wave
+[2026-06-04 09:20:32] [MJHome] Stopped by user.
+[2026-06-04 09:20:32] [MJHome] Camera released.
+[2026-06-04 09:37:23] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:37:23] [MJHome] Camera ID: 3
+[2026-06-04 09:37:23] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:37:24] [MJHome] Customer entry detection started.
+[2026-06-04 09:37:24] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:37:24] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:37:24] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:37:32] [MJHome] Customer entry detected. motion_area=6557.5
+[2026-06-04 09:37:32] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_093732.jpg
+[2026-06-04 09:37:32] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:37:33] [Action] face wave
+[2026-06-04 09:37:40] [Action] release arm
+[2026-06-04 09:37:40] [Audio] Done.
+[2026-06-04 09:37:40] [MJHome] Greeting finished.
+[2026-06-04 09:37:41] [MJHome] Stopped by user.
+[2026-06-04 09:37:41] [MJHome] Camera released.
+[2026-06-04 09:37:45] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:37:45] [MJHome] Camera ID: 3
+[2026-06-04 09:37:45] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:37:46] [MJHome] Customer entry detection started.
+[2026-06-04 09:37:46] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:37:46] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:37:46] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:37:51] [MJHome] Customer entry detected. motion_area=17909.5
+[2026-06-04 09:37:51] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_093751.jpg
+[2026-06-04 09:37:51] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:37:51] [Action] face wave
+[2026-06-04 09:37:57] [MJHome] Stopped by user.
+[2026-06-04 09:37:57] [MJHome] Camera released.
+[2026-06-04 09:39:21] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:39:21] [MJHome] Camera ID: 3
+[2026-06-04 09:39:21] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:39:22] [MJHome] Customer entry detection started.
+[2026-06-04 09:39:22] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:39:22] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:39:22] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:39:27] [MJHome] Customer entry detected. motion_area=76931.0
+[2026-06-04 09:39:27] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_093927.jpg
+[2026-06-04 09:39:27] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:39:28] [Action] face wave
+[2026-06-04 09:39:33] [MJHome] Stopped by user.
+[2026-06-04 09:39:33] [MJHome] Camera released.
+[2026-06-04 09:39:45] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:39:45] [MJHome] Camera ID: 3
+[2026-06-04 09:39:45] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:39:47] [MJHome] Customer entry detection started.
+[2026-06-04 09:39:47] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:39:47] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:39:47] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:39:52] [MJHome] Customer entry detected. motion_area=18180.0
+[2026-06-04 09:39:52] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_093952.jpg
+[2026-06-04 09:39:52] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:39:52] [Action] face wave
+[2026-06-04 09:39:55] [Action] release arm
+[2026-06-04 09:39:59] [Audio] Done.
+[2026-06-04 09:39:59] [MJHome] Greeting finished.
+[2026-06-04 09:40:24] [MJHome] Customer entry detected. motion_area=30608.5
+[2026-06-04 09:40:24] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_094024.jpg
+[2026-06-04 09:40:24] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:40:25] [Action] face wave
+[2026-06-04 09:40:31] [MJHome] Stopped by user.
+[2026-06-04 09:40:31] [MJHome] Camera released.
+[2026-06-04 09:40:52] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:40:52] [MJHome] Camera ID: 3
+[2026-06-04 09:40:52] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:40:54] [MJHome] Customer entry detection started.
+[2026-06-04 09:40:54] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:40:54] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:40:54] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:40:57] [MJHome] Customer entry detected. motion_area=11865.5
+[2026-06-04 09:40:57] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_094057.jpg
+[2026-06-04 09:40:57] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:40:58] [Action] face wave
+[2026-06-04 09:41:05] [Action] release arm
+[2026-06-04 09:41:05] [Audio] Done.
+[2026-06-04 09:41:05] [MJHome] Greeting finished.
+[2026-06-04 09:41:30] [MJHome] Customer entry detected. motion_area=6712.0
+[2026-06-04 09:41:30] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_094130.jpg
+[2026-06-04 09:41:30] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:41:30] [Action] face wave
+[2026-06-04 09:41:37] [Action] release arm
+[2026-06-04 09:41:38] [Audio] Done.
+[2026-06-04 09:41:38] [MJHome] Greeting finished.
+[2026-06-04 09:41:39] [MJHome] Stopped by user.
+[2026-06-04 09:41:39] [MJHome] Camera released.
+[2026-06-04 09:42:35] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:42:35] [MJHome] Camera ID: 4
+[2026-06-04 09:42:35] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:42:37] [ERROR] Cannot open camera 4
+[2026-06-04 09:42:58] [MJHome] NetworkInterface: eth0
+[2026-06-04 09:42:58] [MJHome] Camera ID: 3
+[2026-06-04 09:42:58] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 09:43:00] [MJHome] Customer entry detection started.
+[2026-06-04 09:43:00] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 09:43:00] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 09:43:00] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 09:43:02] [MJHome] Customer entry detected. motion_area=8712.5
+[2026-06-04 09:43:02] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_094302.jpg
+[2026-06-04 09:43:02] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 09:43:02] [Action] face wave
+[2026-06-04 09:43:08] [MJHome] Stopped by user.
+[2026-06-04 09:43:08] [MJHome] Camera released.
+[2026-06-04 10:18:04] [MJHome] NetworkInterface: eth0
+[2026-06-04 10:18:04] [MJHome] Camera ID: 2
+[2026-06-04 10:18:04] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 10:18:06] [ERROR] Cannot open camera 2
+[2026-06-04 10:18:38] [MJHome] NetworkInterface: eth0
+[2026-06-04 10:18:38] [MJHome] Camera ID: 3
+[2026-06-04 10:18:38] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-04 10:18:40] [MJHome] Customer entry detection started.
+[2026-06-04 10:18:40] [MJHome] Please keep robot stationary during detection.
+[2026-06-04 10:18:40] [MJHome] Press Ctrl+C to stop.
+[2026-06-04 10:18:40] [MJHome] Warming up background model for 2 seconds...
+[2026-06-04 10:18:42] [MJHome] Customer entry detected. motion_area=12355.0
+[2026-06-04 10:18:42] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260604_101842.jpg
+[2026-06-04 10:18:42] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-04 10:18:43] [Action] face wave
+[2026-06-04 10:18:50] [Action] release arm
+[2026-06-04 10:18:50] [Audio] Done.
+[2026-06-04 10:18:50] [MJHome] Greeting finished.
+[2026-06-04 10:18:56] [MJHome] Stopped by user.
+[2026-06-04 10:18:56] [MJHome] Camera released.
+[2026-06-05 07:11:36] [MJHome] NetworkInterface: eth0
+[2026-06-05 07:11:36] [MJHome] Camera ID: 3
+[2026-06-05 07:11:36] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-05 07:11:37] [MJHome] Customer entry detection started.
+[2026-06-05 07:11:37] [MJHome] Please keep robot stationary during detection.
+[2026-06-05 07:11:37] [MJHome] Press Ctrl+C to stop.
+[2026-06-05 07:11:37] [MJHome] Warming up background model for 2 seconds...
+[2026-06-05 07:11:45] [MJHome] Customer entry detected. motion_area=6751.5
+[2026-06-05 07:11:45] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260605_071145.jpg
+[2026-06-05 07:11:45] [Audio] Play: greeting_2_16k.wav
+[2026-06-05 07:11:46] [Action] face wave
+[2026-06-05 07:11:53] [Action] release arm
+[2026-06-05 07:11:54] [Audio] Done.
+[2026-06-05 07:11:54] [MJHome] Greeting finished.
+[2026-06-05 07:12:19] [MJHome] Customer entry detected. motion_area=31170.5
+[2026-06-05 07:12:19] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260605_071219.jpg
+[2026-06-05 07:12:19] [Audio] Play: greeting_3_16k.wav
+[2026-06-05 07:12:19] [Action] face wave
+[2026-06-05 07:12:26] [Action] release arm
+[2026-06-05 07:12:30] [Audio] Done.
+[2026-06-05 07:12:30] [MJHome] Greeting finished.
+[2026-06-05 07:12:31] [MJHome] Stopped by user.
+[2026-06-05 07:12:31] [MJHome] Camera released.
+[2026-06-05 07:13:45] [MJHome] NetworkInterface: eth0
+[2026-06-05 07:13:45] [MJHome] Camera ID: 3
+[2026-06-05 07:13:45] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-05 07:13:47] [MJHome] Customer entry detection started.
+[2026-06-05 07:13:47] [MJHome] Please keep robot stationary during detection.
+[2026-06-05 07:13:47] [MJHome] Press Ctrl+C to stop.
+[2026-06-05 07:13:47] [MJHome] Warming up background model for 2 seconds...
+[2026-06-05 07:13:50] [MJHome] Customer entry detected. motion_area=7662.5
+[2026-06-05 07:13:50] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260605_071350.jpg
+[2026-06-05 07:13:50] [Audio] Play: greeting_2_16k.wav
+[2026-06-05 07:13:50] [Action] face wave
+[2026-06-05 07:13:57] [Action] release arm
+[2026-06-05 07:13:58] [Audio] Done.
+[2026-06-05 07:13:58] [MJHome] Greeting finished.
+[2026-06-05 07:14:03] [MJHome] Customer entry detected. motion_area=5086.0
+[2026-06-05 07:14:03] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260605_071403.jpg
+[2026-06-05 07:14:03] [Audio] Play: greeting_3_16k.wav
+[2026-06-05 07:14:04] [Action] face wave
+[2026-06-05 07:14:11] [Action] release arm
+[2026-06-05 07:14:14] [Audio] Done.
+[2026-06-05 07:14:14] [MJHome] Greeting finished.
+[2026-06-05 07:14:19] [MJHome] Customer entry detected. motion_area=38451.0
+[2026-06-05 07:14:19] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260605_071419.jpg
+[2026-06-05 07:14:19] [Audio] Play: greeting_3_16k.wav
+[2026-06-05 07:14:19] [Action] face wave
+[2026-06-05 07:14:26] [Action] release arm
+[2026-06-05 07:14:30] [Audio] Done.
+[2026-06-05 07:14:30] [MJHome] Greeting finished.
+[2026-06-05 07:29:19] [MJHome] Customer entry detected. motion_area=17967.0
+[2026-06-05 07:29:19] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260605_072919.jpg
+[2026-06-05 07:29:19] [Audio] Play: greeting_1_16k.wav
+[2026-06-05 07:29:20] [Action] face wave
+[2026-06-05 07:29:27] [Action] release arm
+[2026-06-05 07:29:27] [Audio] Done.
+[2026-06-05 07:29:27] [MJHome] Greeting finished.
+[2026-06-05 07:29:51] [MJHome] Stopped by user.
+[2026-06-05 07:29:51] [MJHome] Camera released.
+[2026-06-05 10:38:16] [MJHome] NetworkInterface: eth0
+[2026-06-05 10:38:16] [MJHome] Camera ID: 3
+[2026-06-05 10:38:16] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-05 10:38:18] [MJHome] Customer entry detection started.
+[2026-06-05 10:38:18] [MJHome] Please keep robot stationary during detection.
+[2026-06-05 10:38:18] [MJHome] Press Ctrl+C to stop.
+[2026-06-05 10:38:18] [MJHome] Warming up background model for 2 seconds...
+[2026-06-05 10:38:23] [MJHome] Stopped by user.
+[2026-06-05 10:38:23] [MJHome] Camera released.
+[2026-06-10 06:50:24] [MJHome] NetworkInterface: eth0
+[2026-06-10 06:50:24] [MJHome] Camera ID: 3
+[2026-06-10 06:50:24] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-10 06:50:25] [MJHome] Customer entry detection started.
+[2026-06-10 06:50:25] [MJHome] Please keep robot stationary during detection.
+[2026-06-10 06:50:25] [MJHome] Press Ctrl+C to stop.
+[2026-06-10 06:50:25] [MJHome] Warming up background model for 2 seconds...
+[2026-06-10 06:50:35] [MJHome] Stopped by user.
+[2026-06-10 06:50:35] [MJHome] Camera released.
+[2026-06-10 08:50:48] [MJHome] NetworkInterface: eth0
+[2026-06-10 08:50:48] [MJHome] Camera ID: 3
+[2026-06-10 08:50:48] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-10 08:50:50] [MJHome] Customer entry detection started.
+[2026-06-10 08:50:50] [MJHome] Please keep robot stationary during detection.
+[2026-06-10 08:50:50] [MJHome] Press Ctrl+C to stop.
+[2026-06-10 08:50:50] [MJHome] Warming up background model for 2 seconds...
+[2026-06-10 08:50:55] [MJHome] Customer entry detected. motion_area=6938.0
+[2026-06-10 08:50:55] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260610_085055.jpg
+[2026-06-10 08:50:55] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-10 08:50:55] [Action] face wave
+[2026-06-10 08:51:01] [Audio] Done.
+[2026-06-10 08:51:02] [Action] release arm
+[2026-06-10 08:51:02] [MJHome] Greeting finished.
+[2026-06-10 08:51:05] [MJHome] Stopped by user.
+[2026-06-10 08:51:05] [MJHome] Camera released.
+[2026-06-10 08:59:02] [MJHome] NetworkInterface: eth0
+[2026-06-10 08:59:02] [MJHome] Camera ID: 3
+[2026-06-10 08:59:02] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-10 08:59:04] [MJHome] Customer entry detection started.
+[2026-06-10 08:59:04] [MJHome] Please keep robot stationary during detection.
+[2026-06-10 08:59:04] [MJHome] Press Ctrl+C to stop.
+[2026-06-10 08:59:04] [MJHome] Warming up background model for 2 seconds...
+[2026-06-10 08:59:11] [MJHome] Customer entry detected. motion_area=7503.0
+[2026-06-10 08:59:11] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260610_085911.jpg
+[2026-06-10 08:59:11] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-10 08:59:11] [Action] face wave
+[2026-06-10 08:59:17] [Audio] Done.
+[2026-06-10 08:59:18] [Action] release arm
+[2026-06-10 08:59:18] [MJHome] Greeting finished.
+[2026-06-10 08:59:55] [MJHome] Customer entry detected. motion_area=12026.5
+[2026-06-10 08:59:55] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260610_085955.jpg
+[2026-06-10 08:59:55] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-10 08:59:55] [Action] face wave
+[2026-06-10 09:00:01] [Audio] Done.
+[2026-06-10 09:00:02] [Action] release arm
+[2026-06-10 09:00:02] [MJHome] Greeting finished.
+[2026-06-10 09:00:45] [MJHome] Customer entry detected. motion_area=3843.0
+[2026-06-10 09:00:45] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260610_090045.jpg
+[2026-06-10 09:00:45] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-10 09:00:45] [Action] face wave
+[2026-06-10 09:00:51] [Audio] Done.
+[2026-06-10 09:00:52] [Action] release arm
+[2026-06-10 09:00:53] [MJHome] Greeting finished.
+[2026-06-10 09:03:22] [MJHome] Customer entry detected. motion_area=12486.5
+[2026-06-10 09:03:22] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260610_090322.jpg
+[2026-06-10 09:03:22] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-10 09:03:22] [Action] face wave
+[2026-06-10 09:03:28] [Audio] Done.
+[2026-06-10 09:03:29] [Action] release arm
+[2026-06-10 09:03:29] [MJHome] Greeting finished.
+[2026-06-10 09:04:19] [MJHome] Customer entry detected. motion_area=7658.5
+[2026-06-10 09:04:19] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260610_090419.jpg
+[2026-06-10 09:04:19] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-10 09:04:19] [Action] face wave
+[2026-06-10 09:04:25] [Audio] Done.
+[2026-06-10 09:04:26] [Action] release arm
+[2026-06-10 09:04:27] [MJHome] Greeting finished.
+[2026-06-10 09:04:27] [MJHome] Camera released.
+[2026-06-19 09:59:11] [MJHome] NetworkInterface: eth0
+[2026-06-19 09:59:11] [MJHome] Camera ID: 3
+[2026-06-19 09:59:11] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-19 09:59:12] [MJHome] Customer entry detection started.
+[2026-06-19 09:59:12] [MJHome] Please keep robot stationary during detection.
+[2026-06-19 09:59:12] [MJHome] Press Ctrl+C to stop.
+[2026-06-19 09:59:12] [MJHome] Warming up background model for 2 seconds...
+[2026-06-19 09:59:16] [MJHome] Customer entry detected. motion_area=67170.0
+[2026-06-19 09:59:16] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260619_095916.jpg
+[2026-06-19 09:59:16] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-19 09:59:16] [Action] face wave
+[2026-06-19 09:59:22] [Audio] Done.
+[2026-06-19 09:59:23] [Action] release arm
+[2026-06-19 09:59:23] [MJHome] Greeting finished.
+[2026-06-19 09:59:36] [MJHome] Customer entry detected. motion_area=19247.5
+[2026-06-19 09:59:36] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260619_095936.jpg
+[2026-06-19 09:59:36] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-19 09:59:36] [Action] face wave
+[2026-06-19 09:59:42] [Audio] Done.
+[2026-06-19 09:59:43] [Action] release arm
+[2026-06-19 09:59:43] [MJHome] Greeting finished.
+[2026-06-19 09:59:48] [MJHome] Customer entry detected. motion_area=14549.5
+[2026-06-19 09:59:48] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260619_095948.jpg
+[2026-06-19 09:59:48] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-19 09:59:49] [Action] face wave
+[2026-06-19 09:59:55] [Audio] Done.
+[2026-06-19 09:59:56] [Action] release arm
+[2026-06-19 09:59:56] [MJHome] Greeting finished.
+[2026-06-19 10:00:08] [MJHome] Customer entry detected. motion_area=5656.0
+[2026-06-19 10:00:08] [Snapshot] Saved: /home/unitree/unitree_sdk2_python/mjhome_customer_snapshots/customer_20260619_100008.jpg
+[2026-06-19 10:00:08] [Audio] Play: hello_mjhome_16k.wav
+[2026-06-19 10:00:08] [Action] face wave
+[2026-06-19 10:00:14] [Audio] Done.
+[2026-06-19 10:00:15] [Action] release arm
+[2026-06-19 10:00:16] [MJHome] Greeting finished.
+[2026-06-19 10:00:23] [MJHome] Stopped by user.
+[2026-06-19 10:00:23] [MJHome] Camera released.
+[2026-06-26 09:41:29] [MJHome] NetworkInterface: eth0
+[2026-06-26 09:41:29] [MJHome] Camera ID: 3
+[2026-06-26 09:41:29] [MJHome] MIN_MOTION_AREA: 3500
+[2026-06-26 09:41:31] [MJHome] Customer entry detection started.
+[2026-06-26 09:41:31] [MJHome] Please keep robot stationary during detection.
+[2026-06-26 09:41:31] [MJHome] Press Ctrl+C to stop.
+[2026-06-26 09:41:31] [MJHome] Warming up background model for 2 seconds...
+[2026-06-26 09:42:04] [MJHome] Stopped by user.
+[2026-06-26 09:42:04] [MJHome] Camera released.

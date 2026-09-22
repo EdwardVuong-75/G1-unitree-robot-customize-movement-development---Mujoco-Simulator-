@@ -1,0 +1,41 @@
+# .wslconfig template - WSL2 mirrored networking for the G1 USB link
+#
+# WHY
+#   WSL2 defaults to networkingMode=NAT. In NAT mode WSL's eth0 is a private
+#   virtual adapter (usually 172.16-31.x) behind a Hyper-V switch, so it cannot
+#   see the Windows USB Ethernet adapter that holds 192.168.123.x, and DDS
+#   discovery packets to/from the G1 never arrive. Mirrored mode makes WSL share
+#   the Windows network interfaces, so the 192.168.123.x address is visible
+#   inside WSL and CycloneDDS can bind to it.
+#
+#   Mirrored networking needs Windows 11 22H2 (build 22621) or newer and a
+#   recent WSL (store version, `wsl --version` >= 2.0). This machine reports
+#   build 10.0.26200, so it is supported.
+#
+# HOW TO USE
+#   1. Copy this file to your Windows user profile as .wslconfig:
+#          copy unitree_sdk2_python\g1_mujoco_arm\wslconfig_template.txt C:\Users\vuong\.wslconfig
+#      (If C:\Users\vuong\.wslconfig already exists, merge these keys into it
+#      instead of overwriting - it may hold memory/processor settings you want.)
+#   2. From Windows PowerShell or CMD - NOT from inside WSL - run:
+#          wsl --shutdown
+#      Then start your distro again. .wslconfig is only read when the WSL VM
+#      boots, so without the shutdown nothing changes.
+#   3. Inside WSL, confirm the robot subnet is now visible:
+#          ip -br addr          # expect an interface with 192.168.123.x
+#          ping -c 2 192.168.123.164
+#          python3 check_dds_link.py
+#
+# CAVEATS
+#   - Mirrored mode changes how WSL reaches the network generally. If a VPN,
+#     corporate firewall, or another tool misbehaves afterwards, delete or
+#     rename .wslconfig and `wsl --shutdown` again to go back to NAT.
+#   - Comments must be on their own lines; do not put them after a value.
+
+[wsl2]
+networkingMode=mirrored
+dnsTunneling=true
+autoProxy=true
+
+[experimental]
+hostAddressLoopback=true

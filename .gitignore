@@ -1,0 +1,7 @@
+.venv/
+.venv-linux/
+__pycache__/
+*.pyc
+*.egg-info/
+.idea/
+.git.bak/
